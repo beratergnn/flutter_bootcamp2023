@@ -3,10 +3,10 @@ void main() {
 
   // Değişken Tanımlama Tip Belirmeksizin
   var yas = 34;
-
+  print(yas);
   // Değişken Tanımlama Tip Beliterek
   int sayi = 34;
-
+  print(sayi);
   // Primitive Tipler
 
   // Tam Sayılar = int, Ondalıklı Sayılar = double

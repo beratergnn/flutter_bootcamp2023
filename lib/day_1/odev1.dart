@@ -14,4 +14,9 @@ void main() {
   String videoYorumu =
       "Lorem Ipsum pasajlarının birçok çeşitlemesi vardır. Ancak bunların büyük bir çoğunluğu mizah katılarak veya rastgele sözcükler eklenerek değiştirilmişlerdir.";
   String odemeSaati = "17.15.52";
+
+  print(
+      "İlçe:$ilce  -  Kita:$kita  -  Faks:$faks  -  Posta Kodu:$postaKodu  -  Bölüm:$calistigiBolum  -  İnsta:$instaAdresi  -  Ürün Miktar:$urunMiktari");
+  print(
+      "Soyad:$musteriSoyadi  -  Odeme Miktarı:$odemeMiktari  -  D.Tarihi:$dogumTarihi  -  Borç:$borc  -  Medeni Hal:$medeniHal  -  Yorum:$videoYorumu  -  Saat:$odemeSaati");
 }
