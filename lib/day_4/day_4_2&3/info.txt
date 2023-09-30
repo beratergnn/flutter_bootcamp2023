@@ -1,0 +1,22 @@
+Renk :
+https://m3.material.io/styles/color/overview
+https://materialui.co/colors/
+https://www.materialpalette.com/
+https://m2.material.io/design/color/the-color-system.html
+
+Uygulama Fikri:
+https://www.uplabs.com/ui-kits
+https://www.uplabs.com/ui-kits?tool=figma
+
+App fikrini yaz renk paletleri önersin resimler önersin:
+https://color.adobe.com/tr/search?q=pizza
+
+Trend olan renk paletleri:
+https://color.adobe.com/tr/trends
+
+Fontlar için:
+https://fonts.google.com/
+
+1 - Font eklemek için proje kök dizininde fonts adında bir dosya oluştur.
+2 - İstediğin fontun ttf dosyasını indir ve bu klasörün içine aktar
+3 - pubspec.yaml dosyasına font u tanıt ve kullanmaya hazır hale gelsin
