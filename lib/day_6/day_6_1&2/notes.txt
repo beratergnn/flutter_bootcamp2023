@@ -1,0 +1,72 @@
+-
+-
+-
+- * SAYFA GEÇİŞLERİ
+Navigator.push(context,MaterialPageRoute(builder: (context) => const GamePage()));
+Bir sayfadan başka bir sayfaya geçiş yapmamızı sağlayan Navigator sınıfının örnek bir kullanımı.
+builder: (context) => const GamePage() // context olduğumuz sayfayı GamePage(veya başka) gideceğimiz sayfayı belirttiğimiz kısım.
+Geçiş push metodu ile yapılır ise A -> B ye geçişte A sayfası BackStage de tutulur ve gidilen sayfadan Navigator.pop(context) ile geri dönülebilir.
+Eğer geçiş pushReplecement ile yapılır ise A sayfası BackStage'de tutulmaz ve sadece B ye geçiş olur.
+Ayriyetten gidilen sayfada appBar oluşturulmuş ve push metodu ile geçiş sağlanmış ise leading de geri butonu otomatik olarak gelir.
+
+/-
+push ile gidilen sayfalar dediğimiz gibi BackStage e kaydedilir ve son gidilenden bir öncekine.
+Navigator.pop(context); ile geri gelinebilir peki BackStage deki ilk sayfaya pop ların başına nasıl geri gelinir?
+Navigator.of(context).popUntil((route) => route.isFirst); bu kodlama ile.
+
+
+
+
+- * SAYFALAR ARASI VERİ TRANSDERİ
+Stateful olan sayfalarda 2 adet class olur istediğimiz değerleri üst classda değişken olarak oluştururuz ve yapıcı da bunları call ederiz.
+Artık o sayfa çağırıldığı herhanbi bir yerde oluşturulan bu deişkenler gönderilmez ise zaten hata alınır.
+
+
+- * GERİ TUŞUNU İPTAL ETMEK
+Future<bool> backButton(BuildContext context) async {
+    print('Navigation back button clicked');
+    return false; // false = geri dönüş olmasın
+}
+
+metodu build metodu üstünde kodlanır ve body WillPopScope ile sarmalandıktan sonra
+onWillPop: () => backButton(context), a tanımlanan fonksiyon verilir.
+
+- * YAŞAM DÖNGÜSÜ LIFE CYCLE
+* stateful için.
+initState() sayfada build metodundan önce bir defa tetiklenen metod ilk bu metod çalışır ve setState ile tekrar tekrar tetiklenmez.
+build() sayfanın çizilmesini sağlayan metod initState den sonra çalışır ve setState ile tekrar tekrar tetiklenebilir.
+
+*Bir sayfaya geri dönüldüğünde olacak olayları kodlamak için ise giderken kullanılan Navigatır metodunun revize edilmesi gerekir.
+/* önceki
+
+    Navigator.push(context,MaterialPageRoute(
+        builder: (context) => GamePage(person: person,)));
+
+        
+/* yeni hali
+
+    Navigator.push(context,MaterialPageRoute(
+        builder: (context) => GamePage(person: person)))
+        .then((value) => {print('you are back on the home page')});
+
+
+- - Day 6-2
+
+Text İmage veya herhangi bir widget ı görünür görnmez yapmak için bir bool değişken oluşturulur ve widget Visibility widgetı ile sarmalanır.
+visibility: olusturulanDegisken verilir ve değişken ture olduğunda görünür false olduğunda görünmez
+Yine bu değişken göre textin rengi text i boyutu vs herşeyi değiştirilebilir.
+Text(check ? "True" : "False",style: TextStyle(color: check ? Colors.green : Colors.red),),
+
+Başka bir yöntem direkt widgetmış gibi Flutter kodunun ortasına eklenebilir;
+(() {
+    if (check) {
+        return Text('Check Durum: $check');
+    } else {
+        return Text('Check Durum: $check');
+    }
+}()),
+
+
+BottomNavBar - Kullanımı lib/day_6/day_6_1&2/bottom_nav_use altında kodlanmıştır.
+
+

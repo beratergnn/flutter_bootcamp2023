@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bootcamp2023/day_4/day_4_1/collection/advancedDart/asynchronous_use.dart';
 import 'package:flutter_bootcamp2023/day_4/day_4_2&3/colors.dart';
 
 class PizzaPage extends StatefulWidget {
@@ -114,7 +113,7 @@ class customTextButton extends StatelessWidget {
     required this.title,
   });
 
-  String title;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return TextButton(
