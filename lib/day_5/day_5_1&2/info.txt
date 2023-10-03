@@ -1,0 +1,33 @@
+Row - Yan yana widget dizmek için.
+Column - Alt alta widget dizmek için.
+Stack - Üst üste widget dizmek için.
+
+mainAxisAlignment: Yatayda(Row)/Dikeyde(Column) hizalamalar için.
+crossAxixAligment: İçerilen widgetların başlangıç durumlarını hizalamak için. Dikeyde(Row)/Yatayda(Column) hizalamak için.
+
+
+Resim Eklemek İçin: 
+1-Proje kök dizininde assets klasörürü oluşturuğp içine dosyalarını at.
+2-pubspec.yaml a klasörür tanıt ve kullan. // Day5
+
+Spacer() koyulduğu alandaki tüm boşluğu kullanır.
+Örnek olarak Row içindeki 2 widgetın içine koyulur ise widgetları en sola ve en sağa atar.
+
+Responsive Design için.
+build metodu altında Size screenSize = MediaQuery.of(context).size;
+tanımlanır ve uygulamanın açıldığı cihazın genişlik ve yüksekliğine erişilebilir.
+Bu değerler ile ekrana göre dinamik tasarımlar yapılır.
+
+mainAxisSize ile Column ve Row un kaplayacağı alanı içerikleri kadar haline getirebiliriz.
+Center: Ortalamak için row da dikeyde ortalar. İçerisindeki texler için hem yatay hem dikeyde ortalar.
+
+Align ile herhangi bir widgetı sarmalayıp aligment özelliği ile widgetı parent widget içinde hizalama yapılabilir.
+
+
+Expanded : Widgetın yayılmasını sağlar bir widget expanded ile sarmalandığında o widget kapyayabileceği tüm alana genişler.
+flex özelliği ile de bu alan kontrol edilebilir.
+Example; Row içinde 2 adet 100*100 lük container expanded ile sarılıp birine flex:3 birine flex:7 verilirse buna göre yatayda yer kaplarlar.
+
+
+
+Çoklu Dil Desteği:
