@@ -12,6 +12,7 @@ dependencies:
         sdk: flutter
 
     cupertino_icons: ^1.0.2
+    flutter_svg: ^2.0.7
 
 dev_dependencies:
     flutter_test:
@@ -24,6 +25,9 @@ flutter:
 
     assets:
         - assets/
+        - assets/day7/
+        - assets/day7/svg_mood_bad.svg
+        - assets/day7/svg_mood.svg
 
     fonts:
         - family: Pacifico
