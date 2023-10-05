@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bootcamp2023/day_7/odev5/components/custom_button.dart';
+import 'package:flutter_bootcamp2023/day_7/odev5/components/custom_container.dart';
+import 'package:math_expressions/math_expressions.dart';
 
-class CalculatorPage extends StatefulWidget {
-  const CalculatorPage({super.key});
+class Odev5CalculatorPage extends StatefulWidget {
+  const Odev5CalculatorPage({super.key});
 
   @override
-  State<CalculatorPage> createState() => _CalculatorPageState();
+  State<Odev5CalculatorPage> createState() => _Odev5CalculatorPageState();
 }
 
-class _CalculatorPageState extends State<CalculatorPage> {
-  List<String> items = [
-    'C',
-    '?',
-    '←',
+class _Odev5CalculatorPageState extends State<Odev5CalculatorPage> {
+  String userInput = "";
+  String result = '0';
+  List<String> buttonList = [
+    'AC',
+    '(',
+    ')',
     '÷',
     '7',
     '8',
@@ -25,119 +30,120 @@ class _CalculatorPageState extends State<CalculatorPage> {
     '2',
     '3',
     '+',
-    '±',
+    'C',
     '0',
     '.',
     '=',
   ];
-  String value = '0';
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Calculator App'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              height: screenSize.height * .25,
-              width: double.maxFinite,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade800,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  value,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            height: screenSize.height * .60,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade700,
-              border: Border.all(
-                color: Colors.white,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      backgroundColor: Colors.grey.shade300,
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            ResultContainer(
+                screenSize: screenSize, userInput: userInput, result: result),
+            Divider(color: Colors.black),
+            Expanded(
+              child: GridView.builder(
+                itemCount: buttonList.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
                 ),
-                itemCount: items.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (index == 0) {
-                            value = '';
-                          } else if (index == 1) {
-                          } else if (index == 2) {
-                            if (value.isNotEmpty) {
-                              value = value.substring(0, value.length - 1);
-                            }
-                          } else if (index == 3) {
-                            value = '${value}÷';
-                          } else if (index == 4) {
-                            value = '${value}7';
-                          } else if (index == 5) {
-                            value = '${value}8';
-                          } else if (index == 6) {
-                            value = '${value}9';
-                          } else if (index == 7) {
-                          } else if (index == 8) {
-                          } else if (index == 9) {
-                          } else if (index == 10) {
-                          } else if (index == 11) {
-                          } else if (index == 12) {
-                          } else if (index == 13) {
-                          } else if (index == 14) {
-                          } else if (index == 15) {
-                          } else if (index == 16) {
-                          } else if (index == 17) {
-                          } else if (index == 18) {
-                          } else if (index == 19) {}
-                        });
-                      },
-                      child: Card(
-                        color: (index == 3 ||
-                                index == 7 ||
-                                index == 11 ||
-                                index == 15 ||
-                                index == 19)
-                            ? Colors.orange.shade500
-                            : Colors.grey.shade500,
-                        child: Center(
-                          child: Text(
-                            '${items[index]}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ));
-                }),
-          ),
-        ],
+                  return CustomButton(
+                    onTap: () {
+                      buttonClicled(context, buttonList[index]);
+                    },
+                    text: buttonList[index],
+                    shadowColor: getShadowColor(buttonList[index]),
+                    bgColor: getBgColor(buttonList[index]),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  Color getShadowColor(String text) {
+    if (text == '÷' ||
+        text == '×' ||
+        text == '-' ||
+        text == '+' ||
+        text == '=') {
+      return Colors.orange.shade700;
+    } else if (text == 'AC' || text == 'C') {
+      return Colors.blueGrey.shade700;
+    } else {
+      return Colors.grey.shade700;
+    }
+  }
+
+  Color getBgColor(String text) {
+    if (text == '÷' ||
+        text == '×' ||
+        text == '-' ||
+        text == '+' ||
+        text == '=') {
+      return Colors.orange;
+    } else if (text == 'AC' || text == 'C') {
+      return Colors.blueGrey;
+    } else {
+      return Colors.grey;
+    }
+  }
+
+  buttonClicled(BuildContext context, String text) {
+    setState(() {
+      if (text == 'AC') {
+        userInput = "";
+        result = '0';
+        return;
+      }
+      if (text == 'C') {
+        if (userInput.isNotEmpty) {
+          userInput = userInput.substring(0, userInput.length - 1);
+          return;
+        } else {
+          return null;
+        }
+      }
+
+      if (text == '=') {
+        userInput = userInput.replaceAll('×', '*');
+        userInput = userInput.replaceAll('÷', '/');
+        result = calculateIt();
+        userInput = result;
+        if (result.endsWith('.0')) {
+          result = result.replaceAll('.0', '');
+        }
+        if (userInput.endsWith('.0')) {
+          userInput = userInput.replaceAll('.0', '');
+          return;
+        }
+
+        return;
+      }
+      userInput = userInput + text;
+    });
+  }
+
+  calculateIt() {
+    try {
+      var inputExp = Parser().parse(userInput);
+      var resultEva = inputExp.evaluate(EvaluationType.REAL, ContextModel());
+      return resultEva.toString();
+    } catch (e) {
+      return 'Error: $e';
+    }
   }
 }
