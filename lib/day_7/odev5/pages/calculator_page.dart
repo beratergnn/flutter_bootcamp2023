@@ -45,8 +45,37 @@ class _Odev5CalculatorPageState extends State<Odev5CalculatorPage> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            ResultContainer(
-                screenSize: screenSize, userInput: userInput, result: result),
+            SizedBox(
+              height: screenSize.height * .30,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      userInput,
+                      style: TextStyle(
+                        fontSize: 32,
+                        color: Colors.grey.shade700,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      result,
+                      style: TextStyle(
+                        fontSize: 48,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Divider(color: Colors.black),
             Expanded(
               child: GridView.builder(

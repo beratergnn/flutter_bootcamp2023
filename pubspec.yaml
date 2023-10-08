@@ -27,8 +27,7 @@ flutter:
     assets:
         - assets/
         - assets/day7/
-        - assets/day7/svg_mood_bad.svg
-        - assets/day7/svg_mood.svg
+        - assets/day8/
 
     fonts:
         - family: Pacifico
