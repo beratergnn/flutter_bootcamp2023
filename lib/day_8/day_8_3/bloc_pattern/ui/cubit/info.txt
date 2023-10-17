@@ -1,0 +1,5 @@
+1 - Öncelikle uygulamaya flutter_bloc paketi ekleniyor.
+2 - Sonra sayfalar için cubit ler oluşturuluyor.
+3 - Cubit oluşturulurken sayfada ne gibi bir güncelleme yapılacak ise hangi türde extends edilen Cubite o tip veriliyor.
+4 - Projeye Cubit in tanıtılması için main.dart da eklemeler yapılıyor.
+5 - Cubit den emit edilen veriyi dinlemek için sayfada BlocBuilder yapısı kullan. 
