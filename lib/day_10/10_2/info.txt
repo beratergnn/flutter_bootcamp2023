@@ -1,0 +1,49 @@
+https://github.com/beratergnn/flutter_bootcamp2023_contact_app
+
+1 - DB Browser for SQLite da databaseini oluştur.
+
+CREATE TABLE "contacts" (
+	"contact_id"	INTEGER,
+	"contact_name"	TEXT,
+	"contact_no"	TEXT,
+	PRIMARY KEY("contact_id" AUTOINCREMENT)
+)
+
+2 - Projene path ve sqflite paketlerini ekle.
+
+3 - Oluşturduğun database dosyasını proje kök dizinine ekle.
+// Ekledikten sonra kök dizindeki dosyanın DB Browser for SQLite ile bir bağlantısı kalmaz!
+// Ve kod ile database de yapılan değişiklikler için artık kök dizinden telefona clonelanan dosya etkilenir kök dizindeki veya DB Browser for SQLite daki database bundan etkilenmez ve değişmez aynı değillerdir.
+
+4 - İşlemler için lib dosyası altında sqlite paketi içinde dbhelper.dart oluştur projeye tanıt ve clasını yaz.
+
+ assets:
+    - database/contacts.sqlite
+
+
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+class DatabaseHelper {
+  static final String dbName = 'contacts.sqlite'; // Veritabanı adı dosya adı ile aynı
+
+  static Future<Database> databaseConnection() async {
+    String dbPath = join(await getDatabasesPath(), dbName);
+
+    if (await databaseExists(dbPath)) {
+      print('The database already exists, no need to copy it');
+    } else { // kppyalama yapmak için
+      ByteData data = await rootBundle.load('database/$dbName'); //database oluşturulan dosya adı.
+      List<int> bytes =
+          data.buffer.asInt8List(data.offsetInBytes, data.lengthInBytes);
+      await File(dbPath).writeAsBytes(bytes, flush: true);
+      print('Database copied');
+    }
+
+    return openDatabase(dbPath);
+  }
+}
+
+5 - Fonksiyonlarını yazıp db yi kullan.

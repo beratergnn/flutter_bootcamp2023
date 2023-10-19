@@ -10,6 +10,7 @@ import 'package:flutter_bootcamp2023/day_7/odev5/pages/calculator_page.dart';
 import 'package:flutter_bootcamp2023/day_8/day_8_3/bloc_pattern/ui/cubit/ana_sayfa_cubit.dart';
 import 'package:flutter_bootcamp2023/day_8/day_8_3/bloc_pattern/ui/views/ana_sayfa.dart';
 import 'package:flutter_bootcamp2023/day_8/day_8_3/normal_way/ana_sayfa.dart';
+import 'package:flutter_bootcamp2023/day_9/9_3/9_3_main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: BPAnaSayfa(),
+        home: MainPAge9_3(),
       ),
     );
   }

@@ -1,0 +1,111 @@
+TABLOLAR:
+
+CREATE TABLE "customers" (
+	"customer_id"	INTEGER,
+	"customer_name"	TEXT,
+	"customer_address"	TEXT,
+	PRIMARY KEY("customer_id" AUTOINCREMENT)
+)
+
+CREATE TABLE "orders" (
+	"order_id"	INTEGER,
+	"product_id"	INTEGER,
+	"customer_id"	INTEGER,
+	"order_count"	INTEGER,
+	PRIMARY KEY("order_id" AUTOINCREMENT),
+	FOREIGN KEY("customer_id") REFERENCES "customers"("customer_id"),
+	FOREIGN KEY("product_id") REFERENCES "products"("product_id")
+)
+
+CREATE TABLE "products" (
+	"product_id"	INTEGER,
+	"product_name"	TEXT,
+	"product_price"	INTEGER,
+	PRIMARY KEY("product_id" AUTOINCREMENT)
+)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- Tabloya kayıt eklemek için.
+INSERT INTO products (product_name,product_price) VALUES ('Kalem',200);
+INSERT INTO products (product_name,product_price) VALUES ('Tv',8000);
+INSERT INTO products (product_name,product_price) VALUES ('Gözlük',1000);
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- Tabloda varolan bir kaydı güncellemek için.
+UPDATE products SET product_price = 1200 WHERE product_id = 7;
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- Tabloda varolan bir kaydı silmek için.
+DELETE FROM products WHERE product_id = 5;
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- Listeleme: products tablosundaki tüm satırları listeleme.
+SELECT * FROM products;
+
+- Listeleme: products tablosundaki product_name'leri listeleme.
+SELECT product_name FROM products;
+
+- Listeleme: products tablosundaki product_name ve product_price'leri listeleme.
+SELECT product_name,product_price FROM products;
+
+- Listeleme: products tablosundaki kaç adet satır olduğunu listeleme.
+SELECT count(*) FROM products;
+
+- Listeleme: products tablosundaki kaç adet satır olduğunu listeleme.
+SELECT count(*) as NumberOfRows FROM products;
+
+- Listeleme: products tablosundaki product_price'ı 750'ye eşit kaç adet satır olduğunu listeleme.
+SELECT count(*) as NumberOfRows FROM products WHERE product_price = 750;
+
+- Listeleme: products tablosundaki product_price'ı 1000 den büyük kaç adet satır olduğunu listeleme.
+SELECT count(*) as NumberOfRows FROM products WHERE product_price > 1000;
+
+- Listeleme: products tablosundaki product_price'ı 1000 den büyük satırları listeleme.
+SELECT * FROM products WHERE product_price > 1000;
+
+- Listeleme: products tablosundaki product_price'ı 1000 den büyük ve 3000 den küçük satırları listeleme.
+SELECT * FROM products WHERE product_price > 1000 AND product_price < 3000;
+
+- Listeleme: products tablosundaki product_name i TV olanı getir.
+SELECT * FROM products WHERE product_name = 'TV';
+
+- Listeleme: products tablosundaki product_name'e göre sıralayarak listele.
+SELECT * FROM products ORDER BY product_name; // SELECT * FROM products ORDER BY product_name ASC;
+
+- Listeleme: products tablosundaki product_name'e göre büyükten küçüğe sıralayarak listele.
+SELECT * FROM products ORDER BY product_name DESC;
+
+- Listeleme: products tablosundaki product_name'i a harfi içerenleri listeleme.
+SELECT * FROM products WHERE product_name LIKE '%a%'
+
+- Listeleme: Sınırlı veri çekmek için.
+SELECT * FROM products LIMIT 2;
+
+- Listeleme: Sınırlı ve koşullu veri çekmek için.
+SELECT * FROM products WHERE product_price > 2000 LIMIT 2;
+
+- Listeleme: Rastgele sıralama yapmak için.
+// Örnek olarak quiz uygulamasında kullanabilirsin her seferinde rastgele sorular getirmek için 100 adet soru yükle LIMIT le rastgele 20 sini al gibi.
+SELECT * FROM products ORDEY BY RANDOM();
+SELECT * FROM products ORDEY BY RANDOM() LIMIT 20;
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+- Tüm tablolara bir kaç veri girdikten sonra.
+- Foreign Key li tabloda sorgulamalar.
+
+SELECT * FROM orders,products,customers
+SELECT * FROM orders,products,customers WHERE orders.product_id = products.product_id AND orders.customer_id = customers.customer_id; 
+SELECT * FROM orders,products,customers WHERE orders.product_id = products.product_id AND orders.customer_id = customers.customer_id; 
+SELECT order_id,order_count,product_name,product_price,customer_name,customer_address FROM orders,products,customers WHERE orders.product_id = products.product_id AND orders.customer_id = customers.customer_id; 
+
+
+
+ 

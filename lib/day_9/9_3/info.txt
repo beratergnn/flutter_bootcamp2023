@@ -1,0 +1,11 @@
+Depolama 2 tür olarak işlem görür.
+1 - Local (Offline) : Shared preferences, SQLite, Dosya Kaydı
+2 - İnternet (Online) : Web Servis (API), NoSql (Firebase)
+
+
+Shared preferences
+- Anahtar-Değer ilişkisi ile basit kalıcı veri depolama.
+- Veri türleri; String, int, double, bool ve sadece String Listesi.
+- Uygulama silinirse veriler de silinir.
+- Dark mode, login olunması sonrası uygulama içinde tutma ve basit veri depolama gibi işlemler için kullanılabilir.
+- shared_preferences: ^2.2.2 kütüphaneyi ekle.
